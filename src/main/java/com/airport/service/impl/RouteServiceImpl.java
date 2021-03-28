@@ -65,6 +65,16 @@ public class RouteServiceImpl implements RouteService {
     return routeRepository.findByRouteName(routeName);
   }
 
+  @Override
+  public void setRouteRepository(FlyRouteRepository routeRepository) {
+    this.routeRepository = routeRepository;
+  }
+
+  @Override
+  public void setAirportRepository(AirportRepository airportRepository) {
+    this.airportRepository = airportRepository;
+  }
+
 
 
 }

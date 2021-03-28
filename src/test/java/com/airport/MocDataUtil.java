@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import com.airport.model.AirlineCompanyDTO;
 import com.airport.model.AirlineCompanyWithRouteDTO;
 import com.airport.model.AirportDTO;
+import com.airport.model.FlyRouteDTO;
+import com.airport.model.FlyRouteLegDTO;
 import com.airport.persistence.entity.AirlineCompany;
 import com.airport.persistence.entity.Airport;
 import com.airport.persistence.entity.FlyRoute;
@@ -86,5 +88,30 @@ public class MocDataUtil {
     entity.setFoundationDate(new Date());
     entity.setName("Sabiha Gökçen HAVALİMANI");
     return entity;
+  }
+
+  public FlyRouteDTO createMockFlyRouteDTO() {
+    FlyRouteDTO dto = new FlyRouteDTO();
+    dto.setMaxSeatNumber(10);
+    dto.setRouteLeg(createRouteLegDTO());
+    dto.setRouteName("Sabiha Gökçecen - Adnan menderes");
+    dto.setTicketPrice(BigDecimal.valueOf(100));
+    return dto;
+  }
+
+  private FlyRouteLegDTO createRouteLegDTO() {
+    FlyRouteLegDTO dto = new FlyRouteLegDTO();
+    dto.setArrivalAirport("A");
+    dto.setArrivalDateTime(new Date());
+    dto.setDepartureAirport("B");
+    dto.setDepartureDateTime(new Date());
+    return dto;
+  }
+
+  public Airport createMockAirport(String arrivalPort) {
+    Airport port = new Airport();
+    port.setName(arrivalPort);
+    port.setUuid("1");
+    return port;
   }
 }
