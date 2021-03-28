@@ -33,6 +33,9 @@ public class AirportServiceImpl implements AirportService {
     return searchResult;
   }
 
-
+  @Override
+  public void setAirportRepository(AirportRepository airportRepository) {
+    this.airportRepository = airportRepository;
+  }
 
 }
