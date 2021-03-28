@@ -29,8 +29,7 @@ public class TicketServiceImpl implements TicketService {
       Ticket newTicket = new Ticket();
       newTicket.setFlyRoute(route.get());
       newTicket.setSeatNumber(buyRequest.getSeatNumber());
-      ticketRepository.save(newTicket);
-      return newTicket;
+      return ticketRepository.save(newTicket);
     }
     throw new IllegalArgumentException("Ticket buy denied!");
   }
@@ -41,8 +40,11 @@ public class TicketServiceImpl implements TicketService {
   }
 
 
-  private boolean isSeatFree(FlyRoute route, TicketBuyRequest buyRequest) {
-    return !route.getSeatStatus().get(buyRequest.getSeatNumber());
+  private boolean isSeatFree(FlyRoute flyRoute, TicketBuyRequest buyRequest) {
+    if (flyRoute.getSeatStatus().size() < buyRequest.getSeatNumber()) {
+      throw new IllegalArgumentException("Ticket buy denied! Ticket number out of range!");
+    }
+    return !flyRoute.getSeatStatus().get(buyRequest.getSeatNumber());
   }
 
 
