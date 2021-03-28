@@ -17,14 +17,8 @@ public class FlyPriceUtility {
     int seatNumberInUse = findSeatNumberInUse(flyRoute);
 
     int mod = seatNumberInUse % 10;
-    if (isIncrease) {
-      if (mod == 0) {
-        increasePrice(flyRoute);
-      }
-    } else {
-      if (seatNumberInUse > 0 && mod == 9) {
-        decreasePrice(flyRoute);
-      }
+    if (isIncrease && mod == 0) {
+      increasePrice(flyRoute);
     }
   }
 
@@ -37,13 +31,6 @@ public class FlyPriceUtility {
       }
     }
     return seatNumberInUse;
-  }
-
-
-  private void decreasePrice(FlyRoute flyRoute) {
-    BigDecimal currentPrice = flyRoute.getTicketPrice();
-    BigDecimal newPrice = currentPrice.multiply(BigDecimal.valueOf(0.9));
-    flyRoute.setTicketPrice(newPrice);
   }
 
   private void increasePrice(FlyRoute flyRoute) {
