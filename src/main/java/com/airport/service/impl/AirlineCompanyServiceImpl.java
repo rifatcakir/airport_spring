@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.airport.model.AirlineCompanyDTO;
 import com.airport.model.AirlineCompanyWithRouteDTO;
-import com.airport.model.exception.GeneralServiceException;
 import com.airport.persistence.entity.AirlineCompany;
 import com.airport.persistence.entity.FlyRoute;
 import com.airport.persistence.repository.AirlineCompanyRepository;
-import com.airport.persistence.repository.RouteRepositry;
+import com.airport.persistence.repository.FlyRouteRepository;
 import com.airport.service.AirlineCompanyService;
 import com.airport.service.mapper.ServiceObjectMapper;
 
@@ -25,7 +24,7 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
   ServiceObjectMapper serviceObjectMapper;
 
   @Autowired
-  RouteRepositry routeRepository;
+  FlyRouteRepository routeRepository;
 
   @Override
   public AirlineCompany createAirlineCompany(AirlineCompanyDTO airlineCompany) {
@@ -52,7 +51,7 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
         return company.get();
       }
     }
-    throw new GeneralServiceException("Not a valid argument!");
+    throw new IllegalArgumentException("Not a valid argument!");
   }
 
 }

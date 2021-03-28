@@ -1,6 +1,8 @@
 package com.airport.persistence.entity;
 
+import java.util.Map;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,9 @@ public class FlyRoute {
   @JoinColumn(name = "airlineCompany", updatable = false, insertable = false)
   @JsonIgnore
   private AirlineCompany airlineCompany;
+
+  @ElementCollection 
+  private Map<Integer, Boolean> seatStatus;
 
   @Embedded
   private FlyRouteLeg routeLeg;
@@ -61,6 +66,15 @@ public class FlyRoute {
   public void setAirlineCompany(AirlineCompany airlineCompany) {
     this.airlineCompany = airlineCompany;
   }
+
+  public Map<Integer, Boolean> getSeatStatus() {
+    return seatStatus;
+  }
+
+  public void setSeatStatus(Map<Integer, Boolean> seatStatus) {
+    this.seatStatus = seatStatus;
+  }
+
 
 
 }
