@@ -40,7 +40,7 @@ public class TicketServiceImpl implements TicketService {
       newTicket.setCreditCardNumber(creditCardUtility.maskCCN(buyRequest.getCreditCardNo()));
       newTicket.setFlyRoute(route.get());
       newTicket.setSeatNumber(buyRequest.getSeatNumber());
-      calculateFlyPrice.recalculateFlyPrice(route.get());
+      calculateFlyPrice.checkForIncreaseTicketPrice(route.get());
       return ticketRepository.save(newTicket);
     }
     throw new IllegalArgumentException("Ticket buy denied!");

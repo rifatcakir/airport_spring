@@ -9,27 +9,42 @@ import com.airport.persistence.entity.FlyRoute;
 @Component
 public class CalculateFlyPrice {
 
-  public void recalculateFlyPrice(FlyRoute flyRoute) {
-    Map<Integer, Boolean> flyStatus = flyRoute.getSeatStatus();
+  public void checkForIncreaseTicketPrice(FlyRoute flyRoute) {
+    priceCalculator(flyRoute, true);
+  }
+
+
+  public void checkForDecreaseTicketPrice(FlyRoute flyRoute) {
+    priceCalculator(flyRoute, false);
+  }
+
+
+  private void priceCalculator(FlyRoute flyRoute, boolean isIncrease) {
+    int seatNumberInUse = findSeatNumberInUse(flyRoute);
+
+    int mod = seatNumberInUse % 10;
+    if (isIncrease) {
+      if (mod == 0) {
+        increasePrice(flyRoute);
+      }
+    } else {
+      if (seatNumberInUse > 0 && mod == 9) {
+        decreasePrice(flyRoute);
+      }
+    }
+  }
+
+  private int findSeatNumberInUse(FlyRoute flyRoute) {
     int seatNumberInUse = 0;
+    Map<Integer, Boolean> flyStatus = flyRoute.getSeatStatus();
     for (Entry<Integer, Boolean> entry : flyStatus.entrySet()) {
       if (entry.getValue().booleanValue()) {
         seatNumberInUse++;
       }
     }
-    if (seatNumberInUse > 1) {
-      int mod = seatNumberInUse % 10;
-      int incLimit = mod * 10 + 1;
-      if (incLimit == seatNumberInUse) {
-        increasePrice(flyRoute);
-      } else {
-        int decLimit = (mod + 1) * 10 - 1;
-        if (decLimit == seatNumberInUse) {
-          decreasePrice(flyRoute);
-        }
-      }
-    }
+    return seatNumberInUse;
   }
+
 
   private void decreasePrice(FlyRoute flyRoute) {
     BigDecimal currentPrice = flyRoute.getTicketPrice();
@@ -39,7 +54,7 @@ public class CalculateFlyPrice {
 
   private void increasePrice(FlyRoute flyRoute) {
     BigDecimal currentPrice = flyRoute.getTicketPrice();
-    BigDecimal newPrice = currentPrice.multiply(BigDecimal.valueOf(110)).divide(BigDecimal.valueOf(110));
+    BigDecimal newPrice = currentPrice.multiply(BigDecimal.valueOf(1.1));
     flyRoute.setTicketPrice(newPrice);
   }
 

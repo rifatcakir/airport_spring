@@ -19,7 +19,7 @@ public class Ticket {
   private String uuid;
 
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  @JsonIgnoreProperties(value = {"seatStatus"})
+  @JsonIgnoreProperties(value = {"seatStatus", "ticketPrice"})
   private FlyRoute flyRoute;
 
   private int seatNumber;
