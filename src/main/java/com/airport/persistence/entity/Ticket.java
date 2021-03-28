@@ -1,5 +1,6 @@
 package com.airport.persistence.entity;
 
+import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +25,8 @@ public class Ticket {
   private int seatNumber;
 
   private String creditCardNumber;
+
+  private BigDecimal ticketPrice;
 
   public String getUuid() {
     return uuid;
@@ -56,5 +59,14 @@ public class Ticket {
   public void setCreditCardNumber(String creditCardNumber) {
     this.creditCardNumber = creditCardNumber;
   }
+
+  public BigDecimal getTicketPrice() {
+    return ticketPrice;
+  }
+
+  public void setTicketPrice(BigDecimal ticketPrice) {
+    this.ticketPrice = ticketPrice;
+  }
+
 
 }

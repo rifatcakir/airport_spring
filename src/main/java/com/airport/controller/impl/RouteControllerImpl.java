@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.airport.controller.RouteController;
-import com.airport.model.RouteDTO;
+import com.airport.model.FlyRouteDTO;
 import com.airport.persistence.entity.FlyRoute;
 import com.airport.service.RouteService;
 
@@ -24,7 +24,7 @@ public class RouteControllerImpl implements RouteController {
 
   @Override
   @PostMapping("/create")
-  public FlyRoute createAirportRoute(@RequestBody @Valid RouteDTO routeDTO) {
+  public FlyRoute createAirportRoute(@RequestBody @Valid FlyRouteDTO routeDTO) {
     return routeService.createRoute(routeDTO);
   }
 

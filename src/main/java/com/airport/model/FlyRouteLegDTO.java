@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 
 @ApiOperation(value = "Airline Route leg information")
-public class RouteLeg {
+public class FlyRouteLegDTO {
 
   @NotNull
   @ApiModelProperty(notes = "Airport name is character sensitive.", example = "Sabiha Gökçen Uluslararası Havalimanı")

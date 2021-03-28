@@ -3,8 +3,8 @@ package com.airport.service.mapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import com.airport.model.AirlineCompanyDTO;
-import com.airport.model.RouteDTO;
-import com.airport.model.RouteLeg;
+import com.airport.model.FlyRouteDTO;
+import com.airport.model.FlyRouteLegDTO;
 import com.airport.model.AirportDTO;
 import com.airport.persistence.entity.AirlineCompany;
 import com.airport.persistence.entity.FlyRoute;
@@ -38,7 +38,7 @@ public class ServiceObjectMapper {
     return dto;
   }
 
-  public FlyRoute fromRouteDTOToEntity(RouteDTO dto) {
+  public FlyRoute fromRouteDTOToEntity(FlyRouteDTO dto) {
     FlyRoute entity = new FlyRoute();
     BeanUtils.copyProperties(dto, entity);
     FlyRouteLeg routeLeg = new FlyRouteLeg();
@@ -47,10 +47,10 @@ public class ServiceObjectMapper {
     return entity;
   }
 
-  public RouteDTO fromRouteEntityToDTO(FlyRoute entity) {
-    RouteDTO dto = new RouteDTO();
+  public FlyRouteDTO fromRouteEntityToDTO(FlyRoute entity) {
+    FlyRouteDTO dto = new FlyRouteDTO();
     BeanUtils.copyProperties(entity, dto);
-    RouteLeg routeLeg = new RouteLeg();
+    FlyRouteLegDTO routeLeg = new FlyRouteLegDTO();
     BeanUtils.copyProperties(entity.getRouteLeg(), routeLeg);
     dto.setRouteLeg(routeLeg);
     return dto;

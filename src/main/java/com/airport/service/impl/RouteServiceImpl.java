@@ -7,8 +7,8 @@ import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.airport.model.RouteDTO;
-import com.airport.model.RouteLeg;
+import com.airport.model.FlyRouteDTO;
+import com.airport.model.FlyRouteLegDTO;
 import com.airport.persistence.entity.FlyRoute;
 import com.airport.persistence.repository.FlyRouteRepository;
 import com.airport.persistence.repository.AirportRepository;
@@ -29,7 +29,7 @@ public class RouteServiceImpl implements RouteService {
   ServiceObjectMapper serviceObjectMapper;
 
   @Override
-  public FlyRoute createRoute(RouteDTO routeDTO) {
+  public FlyRoute createRoute(FlyRouteDTO routeDTO) {
     verifyRouteLegs(routeDTO.getRouteLeg());
     FlyRoute entity = serviceObjectMapper.fromRouteDTOToEntity(routeDTO);
     entity.setSeatStatus(createSeatList(routeDTO.getMaxSeatNumber()));
@@ -54,7 +54,7 @@ public class RouteServiceImpl implements RouteService {
     return searchResult.get();
   }
 
-  private void verifyRouteLegs(RouteLeg routeLeg) {
+  private void verifyRouteLegs(FlyRouteLegDTO routeLeg) {
     if (!isLegExists(routeLeg.getArrivalAirport()) || !isLegExists(routeLeg.getDepartureAirport())) {
       // throw new GeneralServiceException("Not a valid route leg!");
     }

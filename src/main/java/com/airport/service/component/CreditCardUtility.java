@@ -1,4 +1,4 @@
-package com.airport.service;
+package com.airport.service.component;
 
 import org.springframework.stereotype.Component;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class CreditCardUtility {
 
   public String maskCCN(String creditCardNo) {
-    String cardNo = cleanCardNo(creditCardNo);
+    String cardNo = cleanNonNumericCharacters(creditCardNo);
     return maskCardNo(cardNo);
   }
 
@@ -16,7 +16,7 @@ public class CreditCardUtility {
     return start + "******" + end;
   }
 
-  private String cleanCardNo(String creditCardNo) {
+  private String cleanNonNumericCharacters(String creditCardNo) {
     return creditCardNo.replaceAll("[^\\d.]", "");
   }
 

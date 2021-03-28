@@ -1,5 +1,6 @@
 package com.airport.model;
 
+import java.math.BigDecimal;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,6 +24,10 @@ public class TicketBuyRequest {
   @ApiModelProperty(notes = "Credit Card number", example = "1234-5678-9101-1121")
   private String creditCardNo;
 
+  @NotNull
+  @ApiModelProperty(notes = "Ticket price", example = "100")
+  private BigDecimal ticketPrice;
+
   public String getFlyRouteId() {
     return flyRouteId;
   }
@@ -45,6 +50,14 @@ public class TicketBuyRequest {
 
   public void setCreditCardNo(String creditCardNo) {
     this.creditCardNo = creditCardNo;
+  }
+
+  public BigDecimal getTicketPrice() {
+    return ticketPrice;
+  }
+
+  public void setTicketPrice(BigDecimal ticketPrice) {
+    this.ticketPrice = ticketPrice;
   }
 
 }
