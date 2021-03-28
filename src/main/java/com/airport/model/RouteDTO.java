@@ -1,6 +1,7 @@
 package com.airport.model;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +19,12 @@ public class RouteDTO {
   @ApiModelProperty(notes = "Airline Route legs")
   private RouteLeg routeLeg;
 
+  @NotNull
+  @Valid
+  @Min(1)
+  @ApiModelProperty(notes = "Max number of seats", example = "100")
+  private int maxSeatNumber;
+
   public String getRouteName() {
     return routeName;
   }
@@ -34,6 +41,12 @@ public class RouteDTO {
     this.routeLeg = routeLeg;
   }
 
+  public int getMaxSeatNumber() {
+    return maxSeatNumber;
+  }
 
+  public void setMaxSeatNumber(int maxSeatNumber) {
+    this.maxSeatNumber = maxSeatNumber;
+  }
 
 }

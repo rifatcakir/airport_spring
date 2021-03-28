@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.airport.persistence.entity.FlyRoute;
 
 @Repository
-public interface RouteRepositry extends JpaRepository<FlyRoute, String> {
+public interface FlyRouteRepository extends JpaRepository<FlyRoute, String> {
 
   Set<FlyRoute> findByRouteName(String name);
 
