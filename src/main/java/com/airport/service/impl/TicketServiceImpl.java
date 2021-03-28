@@ -9,6 +9,7 @@ import com.airport.persistence.entity.FlyRoute;
 import com.airport.persistence.entity.Ticket;
 import com.airport.persistence.repository.FlyRouteRepository;
 import com.airport.persistence.repository.TicketRepository;
+import com.airport.service.CreditCardUtility;
 import com.airport.service.TicketService;
 
 @Service
@@ -21,12 +22,16 @@ public class TicketServiceImpl implements TicketService {
   @Autowired
   TicketRepository ticketRepository;
 
+  @Autowired
+  CreditCardUtility creditCardUtility;
+
   @Override
   public Ticket buyTicket(TicketBuyRequest buyRequest) {
     Optional<FlyRoute> route = routeRepository.findById(buyRequest.getFlyRouteId());
     if (route.isPresent() && isSeatFree(route.get(), buyRequest)) {
       arrangeSeat(route.get(), buyRequest);
       Ticket newTicket = new Ticket();
+      newTicket.setCreditCardNumber(creditCardUtility.maskCCN(buyRequest.getCreditCardNo()));
       newTicket.setFlyRoute(route.get());
       newTicket.setSeatNumber(buyRequest.getSeatNumber());
       return ticketRepository.save(newTicket);
