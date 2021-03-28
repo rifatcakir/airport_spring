@@ -1,5 +1,6 @@
 package com.airport.persistence.entity;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -29,11 +30,13 @@ public class FlyRoute {
   @JsonIgnore
   private AirlineCompany airlineCompany;
 
-  @ElementCollection 
+  @ElementCollection
   private Map<Integer, Boolean> seatStatus;
 
   @Embedded
   private FlyRouteLeg routeLeg;
+
+  private BigDecimal ticketPrice;
 
   public String getRouteName() {
     return routeName;
@@ -75,6 +78,12 @@ public class FlyRoute {
     this.seatStatus = seatStatus;
   }
 
+  public BigDecimal getTicketPrice() {
+    return ticketPrice;
+  }
 
+  public void setTicketPrice(BigDecimal ticketPrice) {
+    this.ticketPrice = ticketPrice;
+  }
 
 }
