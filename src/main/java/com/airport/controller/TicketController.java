@@ -10,7 +10,11 @@ public interface TicketController {
 
   @ApiOperation(value = "Buy ticket")
   public Ticket buyTicket(TicketBuyRequest buyRequest);
-  
-  
-  
+
+  @ApiOperation(value = "Search ticket by Id")
+  public Ticket searchTicketById(String ticketId);
+
+  @ApiOperation(value = "Cancel ticket by Id")
+  public Ticket cancelTicketById(String ticketId);
+
 }

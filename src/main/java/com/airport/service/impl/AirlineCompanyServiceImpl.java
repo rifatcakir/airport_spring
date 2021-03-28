@@ -1,6 +1,5 @@
 package com.airport.service.impl;
 
-import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,16 +41,14 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
 
   @Override
   public AirlineCompany assignRouteToAirlineCompany(AirlineCompanyWithRouteDTO airlineCompanyWithRoute) {
-    Optional<AirlineCompany> company = airlineRepository.findById(airlineCompanyWithRoute.getAirlineCompanyId());
-    if (company.isPresent()) {
-      Optional<FlyRoute> route = routeRepository.findById(airlineCompanyWithRoute.getRouteId());
-      if (route.isPresent()) {
-        company.get().getRouteList().add(route.get());
-        airlineRepository.save(company.get());
-        return company.get();
-      }
-    }
-    throw new IllegalArgumentException("Not a valid argument!");
+    AirlineCompany company = airlineRepository.findById(airlineCompanyWithRoute.getAirlineCompanyId())
+        .orElseThrow(() -> new IllegalArgumentException("Company not found!"));
+    FlyRoute route =
+        routeRepository.findById(airlineCompanyWithRoute.getRouteId()).orElseThrow(() -> new IllegalArgumentException("Route not found!"));
+
+    company.getRouteList().add(route);
+    airlineRepository.save(company);
+    return company;
   }
 
 }

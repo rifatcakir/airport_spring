@@ -7,17 +7,11 @@ import org.springframework.stereotype.Component;
 import com.airport.persistence.entity.FlyRoute;
 
 @Component
-public class CalculateFlyPrice {
+public class FlyPriceUtility {
 
   public void checkForIncreaseTicketPrice(FlyRoute flyRoute) {
     priceCalculator(flyRoute, true);
   }
-
-
-  public void checkForDecreaseTicketPrice(FlyRoute flyRoute) {
-    priceCalculator(flyRoute, false);
-  }
-
 
   private void priceCalculator(FlyRoute flyRoute, boolean isIncrease) {
     int seatNumberInUse = findSeatNumberInUse(flyRoute);

@@ -2,7 +2,6 @@ package com.airport.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,16 +46,12 @@ public class RouteServiceImpl implements RouteService {
 
   @Override
   public FlyRoute searchRouteById(String routeId) {
-    Optional<FlyRoute> searchResult = routeRepository.findById(routeId);
-    if (!searchResult.isPresent()) {
-      throw new IllegalArgumentException("Route not found!");
-    }
-    return searchResult.get();
+    return routeRepository.findById(routeId).orElseThrow(() -> new IllegalArgumentException("Route not found!"));
   }
 
   private void verifyRouteLegs(FlyRouteLegDTO routeLeg) {
     if (!isLegExists(routeLeg.getArrivalAirport()) || !isLegExists(routeLeg.getDepartureAirport())) {
-      // throw new GeneralServiceException("Not a valid route leg!");
+      throw new IllegalArgumentException("Not a valid route leg!");
     }
 
   }

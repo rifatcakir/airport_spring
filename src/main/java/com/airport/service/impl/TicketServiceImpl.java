@@ -1,7 +1,6 @@
 package com.airport.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import com.airport.persistence.entity.Ticket;
 import com.airport.persistence.repository.FlyRouteRepository;
 import com.airport.persistence.repository.TicketRepository;
 import com.airport.service.TicketService;
-import com.airport.service.component.CalculateFlyPrice;
+import com.airport.service.component.FlyPriceUtility;
 import com.airport.service.component.CreditCardUtility;
 
 @Service
@@ -28,23 +27,45 @@ public class TicketServiceImpl implements TicketService {
   CreditCardUtility creditCardUtility;
 
   @Autowired
-  CalculateFlyPrice calculateFlyPrice;
-  
+  FlyPriceUtility flyPriceUtil;
+
   @Override
   public Ticket buyTicket(TicketBuyRequest buyRequest) {
-    Optional<FlyRoute> route = routeRepository.findById(buyRequest.getFlyRouteId());
-    if (route.isPresent() && isSeatFree(route.get(), buyRequest)) {
-      arrangeSeat(route.get(), buyRequest);
-      Ticket newTicket = new Ticket();
-      newTicket.setTicketPrice(verifyAmount(buyRequest, route.get()));
-      newTicket.setCreditCardNumber(creditCardUtility.maskCCN(buyRequest.getCreditCardNo()));
-      newTicket.setFlyRoute(route.get());
-      newTicket.setSeatNumber(buyRequest.getSeatNumber());
-      calculateFlyPrice.checkForIncreaseTicketPrice(route.get());
-      return ticketRepository.save(newTicket);
-    }
-    throw new IllegalArgumentException("Ticket buy denied!");
+    FlyRoute route = routeRepository.findById(buyRequest.getFlyRouteId()).orElseThrow(() -> new IllegalArgumentException("Route not found!"));
+
+    arrangeSeat(route, buyRequest);
+
+    Ticket newTicket = new Ticket();
+    newTicket.setTicketPrice(verifyAmount(buyRequest, route));
+    newTicket.setCreditCardNumber(creditCardUtility.maskCCN(buyRequest.getCreditCardNo()));
+    newTicket.setFlyRoute(route);
+    newTicket.setSeatNumber(buyRequest.getSeatNumber());
+    flyPriceUtil.checkForIncreaseTicketPrice(route);
+    return ticketRepository.save(newTicket);
   }
+
+
+
+  @Override
+  public Ticket searchTicketById(String ticketId) {
+    return ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found!"));
+  }
+
+
+  @Override
+  public Ticket cancelTicketById(String ticketId) {
+    Ticket ticket = searchTicketById(ticketId);
+    if (ticket != null) {
+      relaseSeat(ticket);
+      ticket.setFlyRoute(null);
+    }
+    return ticket;
+  }
+
+  private void relaseSeat(Ticket ticket) {
+    ticket.getFlyRoute().getSeatStatus().put(ticket.getSeatNumber(), false);
+  }
+
 
 
   private BigDecimal verifyAmount(TicketBuyRequest buyRequest, FlyRoute flyRoute) {
@@ -56,6 +77,9 @@ public class TicketServiceImpl implements TicketService {
 
 
   private void arrangeSeat(FlyRoute flyRoute, TicketBuyRequest buyRequest) {
+    if (!isSeatFree(flyRoute, buyRequest)) {
+      throw new IllegalArgumentException("Seat is not empty!");
+    }
     flyRoute.getSeatStatus().put(buyRequest.getSeatNumber(), true);
   }
 
@@ -66,7 +90,5 @@ public class TicketServiceImpl implements TicketService {
     }
     return !flyRoute.getSeatStatus().get(buyRequest.getSeatNumber());
   }
-
-
 
 }
