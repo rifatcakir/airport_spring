@@ -28,7 +28,7 @@ public class AirportControllerImpl implements AirportController {
 
   @Override
   @GetMapping("/search")
-  public Airport searchAirportById(@RequestParam("name") String name) {
+  public Airport searchAirportByName(@RequestParam("name") String name) {
     return airportService.searchAirport(name);
   }
 }

@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import com.airport.model.AirlineCompanyDTO;
 import com.airport.model.AirlineCompanyWithRouteDTO;
+import com.airport.model.AirportDTO;
 import com.airport.persistence.entity.AirlineCompany;
+import com.airport.persistence.entity.Airport;
 import com.airport.persistence.entity.FlyRoute;
 import com.airport.persistence.entity.FlyRouteLeg;
 
@@ -65,5 +67,24 @@ public class MocDataUtil {
     leg.setDepartureAirport("B");
     leg.setDepartureDateTime(new Date());
     return leg;
+  }
+
+  public AirportDTO createMockAirportDTO() {
+    AirportDTO dto = new AirportDTO();
+    dto.setCityName("İstanbul");
+    dto.setCountryName("Turkey");
+    dto.setFoundationDate(new Date());
+    dto.setName("Sabiha Gökçen HAVALİMANI");
+    return dto;
+  }
+
+  public Airport createAirportEntity() {
+    Airport entity = new Airport();
+    entity.setUuid("1");
+    entity.setCityName("İstanbul");
+    entity.setCountryName("Turkey");
+    entity.setFoundationDate(new Date());
+    entity.setName("Sabiha Gökçen HAVALİMANI");
+    return entity;
   }
 }
