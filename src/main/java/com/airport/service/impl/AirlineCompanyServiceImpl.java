@@ -51,4 +51,14 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
     return company;
   }
 
+  @Override
+  public void setAirlineRepository(AirlineCompanyRepository airlineRepository) {
+    this.airlineRepository = airlineRepository;
+  }
+
+  @Override
+  public void setRouteRepository(FlyRouteRepository routeRepository) {
+    this.routeRepository = routeRepository;
+  }
+
 }
