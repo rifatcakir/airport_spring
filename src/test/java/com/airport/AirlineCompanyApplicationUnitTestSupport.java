@@ -93,7 +93,7 @@ public class AirlineCompanyApplicationUnitTestSupport {
   }
 
 
-  public void testEveryPartThatAssignRouteToAirline(AirlineCompany mockCompany) {
+  public void testThatAssignRouteToAirline(AirlineCompany mockCompany) {
     // @formatter:off
     assertThatPaymentPlanForServiceResponse(mockCompany)
       .hasValidCompanyInformations()

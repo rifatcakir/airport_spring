@@ -12,7 +12,7 @@ public interface AirportController {
   public Airport createAirport(AirportDTO airportDTO);
 
   @ApiOperation(value = "Search Airport")
-  public Airport searchAirportById(String id);
+  public Airport searchAirportByName(String name);
   
 
 }

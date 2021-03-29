@@ -34,7 +34,6 @@ public class CustomAirlineCompanyWithRouteAssert extends AbstractAssert<CustomAi
         assertThat(route.getAirlineCompany()).isNotNull();
         assertThat(route.getRouteName()).isNotNull();
         assertThat(route.getSeatStatus()).isNotNull();
-        assertThat(route.getUuid()).isNotNull();
         assertThat(route.getTicketPrice()).isNotNegative();
         assertTrue(route.getTicketPrice().compareTo(BigDecimal.valueOf(0)) > 0);
 

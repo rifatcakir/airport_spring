@@ -18,7 +18,7 @@ public class Ticket {
   @GenericGenerator(name = "system-uuid", strategy = "uuid")
   private String uuid;
 
-  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonIgnoreProperties(value = {"seatStatus", "ticketPrice"})
   private FlyRoute flyRoute;
 

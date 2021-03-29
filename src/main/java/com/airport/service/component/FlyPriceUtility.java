@@ -22,7 +22,7 @@ public class FlyPriceUtility {
     }
   }
 
-  private int findSeatNumberInUse(FlyRoute flyRoute) {
+  public int findSeatNumberInUse(FlyRoute flyRoute) {
     int seatNumberInUse = 0;
     Map<Integer, Boolean> flyStatus = flyRoute.getSeatStatus();
     for (Entry<Integer, Boolean> entry : flyStatus.entrySet()) {

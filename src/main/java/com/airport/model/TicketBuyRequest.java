@@ -22,7 +22,7 @@ public class TicketBuyRequest {
   @NotNull
   @Size(min = 16)
   @ApiModelProperty(notes = "Credit Card number", example = "1234-5678-9101-1121")
-  private String creditCardNo;
+  private String creditCardNumber;
 
   @NotNull
   @ApiModelProperty(notes = "Ticket price", example = "100")
@@ -44,12 +44,12 @@ public class TicketBuyRequest {
     this.seatNumber = seatNumber;
   }
 
-  public String getCreditCardNo() {
-    return creditCardNo;
+  public String getCreditCardNumber() {
+    return creditCardNumber;
   }
 
-  public void setCreditCardNo(String creditCardNo) {
-    this.creditCardNo = creditCardNo;
+  public void setCreditCardNo(String creditCardNumber) {
+    this.creditCardNumber = creditCardNumber;
   }
 
   public BigDecimal getTicketPrice() {

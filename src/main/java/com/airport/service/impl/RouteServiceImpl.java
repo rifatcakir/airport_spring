@@ -56,13 +56,23 @@ public class RouteServiceImpl implements RouteService {
 
   }
 
-  private boolean isLegExists(String arrivalAirport) {
-    return (airportRepository.findByName(arrivalAirport) != null);
+  private boolean isLegExists(String airPort) {
+    return (airportRepository.findByName(airPort) != null);
   }
 
   @Override
   public Set<FlyRoute> searchRouteByName(String routeName) {
     return routeRepository.findByRouteName(routeName);
+  }
+
+  @Override
+  public void setRouteRepository(FlyRouteRepository routeRepository) {
+    this.routeRepository = routeRepository;
+  }
+
+  @Override
+  public void setAirportRepository(AirportRepository airportRepository) {
+    this.airportRepository = airportRepository;
   }
 
 

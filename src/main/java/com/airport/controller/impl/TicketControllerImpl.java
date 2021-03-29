@@ -28,7 +28,7 @@ public class TicketControllerImpl implements TicketController {
 
   @Override
   @GetMapping("/search/Id")
-  public Ticket searchTicketById(@RequestParam("ticketId")  String ticketId) {
+  public Ticket searchTicketById(@RequestParam("ticketId") String ticketId) {
     return ticketService.searchTicketById(ticketId);
   }
 

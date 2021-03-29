@@ -2,7 +2,9 @@ package com.airport;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ import com.airport.service.AirlineCompanyService;
 @TestInstance(Lifecycle.PER_CLASS)
 @AutoConfigureMockMvc
 @ActiveProfiles("unit-test")
-@DisplayName("Airline Company unit-test")
+@DisplayName("Airline company unit-test")
 @DirtiesContext
 class AirlineCompanyApplicationUnitTest {
 
@@ -80,7 +82,7 @@ class AirlineCompanyApplicationUnitTest {
     assertNotNull(mockDataUtil);
     applicationTestSupport.searcAirlineCompanyByNameWhenErrorThrown();
   }
-  
+
   @Test
   void whenCompanyNotExists_AssignToAirlineCompany_ReturnError() throws Exception {
     assertNotNull(applicationTestSupport);
@@ -88,7 +90,7 @@ class AirlineCompanyApplicationUnitTest {
     AirlineCompanyWithRouteDTO mockData = mockDataUtil.createAirlineCompanyWithRouteDTO();
     applicationTestSupport.assignAirlineCompanyToRouteThenThrowCompanyNotFound(mockData);
   }
-  
+
   @Test
   void whenRouteNotExists_AssignToAirlineCompany_ReturnError() throws Exception {
     assertNotNull(applicationTestSupport);
@@ -117,11 +119,18 @@ class AirlineCompanyApplicationUnitTest {
 
     applicationTestSupport.assignRouteToAirline(mockCompany, mockFlyRoute, mockDataUtil.createAirlineCompanyWithRouteDTO());
   }
-  
+
   @Test
-  void test_EveryPart_ThatAsignRouteToAirlineCompany() {
+  void test_FullyAssert_AsignRouteToAirlineCompany() {
     assertNotNull(applicationTestSupport);
-    applicationTestSupport.testEveryPartThatAssignRouteToAirline(mockCompany);
+    mockCompany.setRouteList(createMockRouteList());
+    applicationTestSupport.testThatAssignRouteToAirline(mockCompany);
+  }
+
+  private Set<FlyRoute> createMockRouteList() {
+    Set<FlyRoute> routeList = new HashSet<>();
+    routeList.add(mockDataUtil.createMockFlyRoute());
+    return routeList;
   }
 
 }
