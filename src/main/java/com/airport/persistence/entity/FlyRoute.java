@@ -20,7 +20,7 @@ public class FlyRoute {
   @Id
   @GeneratedValue(generator = "system-uuid")
   @GenericGenerator(name = "system-uuid", strategy = "uuid")
-  private String uuid;
+  private String flyRouteId;
 
   @Column(length = 150)
   private String routeName;
@@ -54,12 +54,12 @@ public class FlyRoute {
     this.routeLeg = routeLeg;
   }
 
-  public String getUuid() {
-    return uuid;
+  public String getFlyRouteId() {
+    return flyRouteId;
   }
 
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
+  public void setFlyRouteId(String flyRouteId) {
+    this.flyRouteId = flyRouteId;
   }
 
   public AirlineCompany getAirlineCompany() {

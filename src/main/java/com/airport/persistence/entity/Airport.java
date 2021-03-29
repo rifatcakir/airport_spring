@@ -16,7 +16,7 @@ public class Airport {
   @Id
   @GeneratedValue(generator = "system-uuid")
   @GenericGenerator(name = "system-uuid", strategy = "uuid")
-  private String uuid;
+  private String airportId;
 
   @Column(length = 50)
   private String name;
@@ -29,12 +29,12 @@ public class Airport {
   @Column(length = 100)
   private String cityName;
 
-  public String getUuid() {
-    return uuid;
+  public String getAirportId() {
+    return airportId;
   }
 
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
+  public void setAirportId(String airportId) {
+    this.airportId = airportId;
   }
 
   public String getName() {

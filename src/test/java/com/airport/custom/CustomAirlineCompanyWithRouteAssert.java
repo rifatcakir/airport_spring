@@ -22,7 +22,7 @@ public class CustomAirlineCompanyWithRouteAssert extends AbstractAssert<CustomAi
     assertThat(company.getCompanyName()).isNotNull();
     assertThat(company.getCountryName()).isNotNull();
     assertThat(company.getFoundationDate()).isNotNull();
-    assertThat(company.getUuid()).isNotNull();
+    assertThat(company.getAirlineCompanyId()).isNotNull();
     return myself;
   }
 

@@ -67,7 +67,7 @@ public class RouteApplicationUnitTestSupport {
     this.mockMvc.perform(get("/airline/route/search/Id?routeId="+uuid).contentType(MediaType.APPLICATION_JSON))
       .andDo(print())
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.uuid", notNullValue()));
+      .andExpect(jsonPath("$.flyRouteId", notNullValue()));
     // @formatter:on
   }
 

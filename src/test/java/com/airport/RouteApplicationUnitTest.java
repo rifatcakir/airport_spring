@@ -77,11 +77,11 @@ class RouteApplicationUnitTest {
   void searchRouteById() throws Exception {
     assertNotNull(applicationTestSupport);
     FlyRoute route = mockDataUtil.createMockFlyRoute();
-    route.setUuid("1");
+    route.setFlyRouteId("1");
     Optional<FlyRoute> mockData = Optional.of(route);
-    when(routeRepository.findById(mockData.get().getUuid())).thenReturn(mockData);
+    when(routeRepository.findById(mockData.get().getFlyRouteId())).thenReturn(mockData);
     routeService.setRouteRepository(routeRepository);
-    applicationTestSupport.searchAirportRouteById(mockData.get().getUuid());
+    applicationTestSupport.searchAirportRouteById(mockData.get().getFlyRouteId());
   }
 
   @Test

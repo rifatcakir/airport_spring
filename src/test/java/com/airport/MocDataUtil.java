@@ -37,7 +37,7 @@ public class MocDataUtil {
     mockCompany.setCountryName("Turkey");
     mockCompany.setFoundationDate(new Date());
     mockCompany.setRouteList(new HashSet<>());
-    mockCompany.setUuid("1");
+    mockCompany.setAirlineCompanyId("1");
     return mockCompany;
   }
 
@@ -83,7 +83,7 @@ public class MocDataUtil {
 
   public Airport createAirportEntity() {
     Airport entity = new Airport();
-    entity.setUuid("1");
+    entity.setAirportId("1");
     entity.setCityName("İstanbul");
     entity.setCountryName("Turkey");
     entity.setFoundationDate(new Date());
@@ -112,7 +112,7 @@ public class MocDataUtil {
   public Airport createMockAirport(String arrivalPort) {
     Airport port = new Airport();
     port.setName(arrivalPort);
-    port.setUuid("1");
+    port.setAirportId("1");
     return port;
   }
 
@@ -129,10 +129,10 @@ public class MocDataUtil {
     Ticket entity = new Ticket();
     entity.setCreditCardNumber("123456******1112");
     entity.setFlyRoute(createMockFlyRoute());
-    entity.getFlyRoute().setUuid("1");
+    entity.getFlyRoute().setFlyRouteId("1");
     entity.setSeatNumber(1);
     entity.setTicketPrice(BigDecimal.valueOf(100));
-    entity.setUuid("1");
+    entity.setTicketId("1");
     return entity;
   }
 }

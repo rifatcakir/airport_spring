@@ -16,7 +16,7 @@ public class Ticket {
   @Id
   @GeneratedValue(generator = "system-uuid")
   @GenericGenerator(name = "system-uuid", strategy = "uuid")
-  private String uuid;
+  private String ticketId;
 
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonIgnoreProperties(value = {"seatStatus", "ticketPrice"})
@@ -28,12 +28,12 @@ public class Ticket {
 
   private BigDecimal ticketPrice;
 
-  public String getUuid() {
-    return uuid;
+  public String getTicketId() {
+    return ticketId;
   }
 
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
+  public void setTicketId(String ticketId) {
+    this.ticketId = ticketId;
   }
 
   public FlyRoute getFlyRoute() {

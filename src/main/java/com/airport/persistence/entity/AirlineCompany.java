@@ -21,7 +21,7 @@ public class AirlineCompany {
   @Id
   @GeneratedValue(generator = "system-uuid")
   @GenericGenerator(name = "system-uuid", strategy = "uuid")
-  private String uuid;
+  private String airlineCompanyId;
 
   @Column(length = 50)
   private String companyName;
@@ -34,12 +34,12 @@ public class AirlineCompany {
   @JoinColumn(name = "airlineCompany")
   private Set<FlyRoute> routeList;
 
-  public String getUuid() {
-    return uuid;
+  public String getAirlineCompanyId() {
+    return airlineCompanyId;
   }
 
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
+  public void setAirlineCompanyId(String airlineId) {
+    this.airlineCompanyId = airlineId;
   }
 
   public String getCompanyName() {

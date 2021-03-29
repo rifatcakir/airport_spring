@@ -37,9 +37,9 @@ public class TicketApplicationUnitTestSupport {
     result
         .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", notNullValue()))
+        .andExpect(jsonPath("$.ticketId", notNullValue()))
         .andExpect(jsonPath("$.flyRoute", notNullValue()))
-        .andExpect(jsonPath("$.flyRoute.uuid", notNullValue()))
+        .andExpect(jsonPath("$.flyRoute.flyRouteId", notNullValue()))
         .andExpect(jsonPath("$.flyRoute.ticketPrice").doesNotExist())
         .andExpect(jsonPath("$.flyRoute.routeName", is(flyRoute.getRouteName())))
         .andExpect(jsonPath("$.flyRoute.routeLeg", notNullValue()))
@@ -101,12 +101,12 @@ public class TicketApplicationUnitTestSupport {
   public void searchValidTicket(Ticket mockTicket) throws Exception {
     FlyRoute flyRoute = mockTicket.getFlyRoute();
     // @formatter:off
-    this.mockMvc.perform(get("/ticket/search/Id?ticketId="+mockTicket.getUuid()).contentType(MediaType.APPLICATION_JSON))
+    this.mockMvc.perform(get("/ticket/search/Id?ticketId="+mockTicket.getTicketId()).contentType(MediaType.APPLICATION_JSON))
       .andDo(print())
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.uuid", notNullValue()))
+      .andExpect(jsonPath("$.ticketId", notNullValue()))
       .andExpect(jsonPath("$.flyRoute", notNullValue()))
-      .andExpect(jsonPath("$.flyRoute.uuid", notNullValue()))
+      .andExpect(jsonPath("$.flyRoute.flyRouteId", notNullValue()))
       .andExpect(jsonPath("$.flyRoute.routeName", is(flyRoute.getRouteName())))
       .andExpect(jsonPath("$.flyRoute.routeLeg", notNullValue()))
       .andExpect(jsonPath("$.flyRoute.ticketPrice").doesNotExist())
@@ -147,12 +147,12 @@ public class TicketApplicationUnitTestSupport {
 
   public void cancelValidTicket(Ticket mockTicket) throws Exception {
     // @formatter:off
-    ResultActions result = this.mockMvc.perform(get("/ticket/cancel/Id?ticketId="+mockTicket.getUuid()).contentType(MediaType.APPLICATION_JSON));
+    ResultActions result = this.mockMvc.perform(get("/ticket/cancel/Id?ticketId="+mockTicket.getTicketId()).contentType(MediaType.APPLICATION_JSON));
         
     result
         .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", notNullValue()))
+        .andExpect(jsonPath("$.ticketId", notNullValue()))
         .andExpect(jsonPath("$.flyRoute", nullValue()))
         .andExpect(jsonPath("$.seatNumber", is(mockTicket.getSeatNumber())))
         .andExpect(jsonPath("$.creditCardNumber").value(mockTicket.getCreditCardNumber()))

@@ -35,7 +35,7 @@ public class AirlineCompanyApplicationUnitTestSupport {
     this.mockMvc.perform(post("/airline/company/create").contentType(MediaType.APPLICATION_JSON).content(asJsonString(mockCreateRequest)))
     .andDo(print())
     .andExpect(status().isOk())
-    .andExpect(jsonPath("$.uuid", notNullValue()))
+    .andExpect(jsonPath("$.airlineCompanyId", notNullValue()))
     .andExpect(jsonPath("$.foundationDate", notNullValue()))
     .andExpect(jsonPath("$.companyName",is(mockCreateRequest.getCompanyName())));
      // @formatter:on
@@ -48,7 +48,7 @@ public class AirlineCompanyApplicationUnitTestSupport {
     this.mockMvc.perform(get("/airline/company/search/?companyName="+mockCompany.getCompanyName()).contentType(MediaType.APPLICATION_JSON))
       .andDo(print())
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.uuid", notNullValue()))
+      .andExpect(jsonPath("$.airlineCompanyId", notNullValue()))
       .andExpect(jsonPath("$.foundationDate", notNullValue()))
       .andExpect(jsonPath("$.countryName", is(mockCompany.getCountryName())))
       .andExpect(jsonPath("$.companyName",is(mockCompany.getCompanyName())));
@@ -74,12 +74,12 @@ public class AirlineCompanyApplicationUnitTestSupport {
     // @formatter:off
     this.mockMvc.perform(post("/airline/company/assign/route").contentType(MediaType.APPLICATION_JSON).content(asJsonString(airlineCompanyWithRouteDTO)))
     .andDo(print())
-    .andExpect(jsonPath("$.uuid", is(mockCompany.getUuid())))
+    .andExpect(jsonPath("$.airlineCompanyId", is(mockCompany.getAirlineCompanyId())))
     .andExpect(jsonPath("$.foundationDate", notNullValue()))
     .andExpect(jsonPath("$.companyName",is(mockCompany.getCompanyName())))
     .andExpect(jsonPath("$.countryName", is(mockCompany.getCountryName())))
     .andExpect(jsonPath("$.routeList", notNullValue()))
-    .andExpect(jsonPath("$.routeList.[*].uuid", notNullValue()))
+    .andExpect(jsonPath("$.routeList.[*].flyRouteId", notNullValue()))
     .andExpect(jsonPath("$.routeList.[*].routeName", notNullValue()))
     .andExpect(jsonPath("$.routeList.[*].seatStatus", notNullValue()))
     .andExpect(jsonPath("$.routeList[*].routeLeg", notNullValue()))

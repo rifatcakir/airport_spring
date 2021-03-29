@@ -114,13 +114,13 @@ class TicketApplicationUnitTest {
     Optional<FlyRoute> route = Optional.ofNullable(flyRoute);
 
     when(routeRepository.findById(mockRequest.getFlyRouteId())).thenReturn(route);
-    when(ticketRepository.findById(entity.getUuid())).thenReturn(entityOpt);
+    when(ticketRepository.findById(entity.getTicketId())).thenReturn(entityOpt);
 
     ticketService.setRouteRepository(routeRepository);
     ticketService.setTicketRepository(ticketRepository);
 
 
-    Ticket ticketCanceled = ticketService.cancelTicketById(entity.getUuid());
+    Ticket ticketCanceled = ticketService.cancelTicketById(entity.getTicketId());
 
     boolean finalSeatStatus = flyRoute.getSeatStatus().get(ticketCanceled.getSeatNumber()).booleanValue();
 
@@ -248,7 +248,7 @@ class TicketApplicationUnitTest {
     Ticket mockTicket = mockDataUtil.createMockTicketEntity();
     Optional<Ticket> ticket = Optional.ofNullable(mockTicket);
 
-    when(ticketRepository.findById(mockTicket.getUuid())).thenReturn(ticket);
+    when(ticketRepository.findById(mockTicket.getTicketId())).thenReturn(ticket);
     ticketService.setTicketRepository(ticketRepository);
     applicationTestSupport.searchValidTicket(mockTicket);
 
@@ -282,7 +282,7 @@ class TicketApplicationUnitTest {
     Ticket mockTicket = mockDataUtil.createMockTicketEntity();
     Optional<Ticket> ticket = Optional.ofNullable(mockTicket);
 
-    when(ticketRepository.findById(mockTicket.getUuid())).thenReturn(ticket);
+    when(ticketRepository.findById(mockTicket.getTicketId())).thenReturn(ticket);
     ticketService.setTicketRepository(ticketRepository);
 
     applicationTestSupport.cancelValidTicket(mockTicket);

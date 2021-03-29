@@ -32,7 +32,7 @@ public class AirportApplicationUnitTestSupport {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is(createMockAirportDTO.getName())))
-        .andExpect(jsonPath("$.uuid", notNullValue()))
+        .andExpect(jsonPath("$.airportId", notNullValue()))
         .andExpect(jsonPath("$.foundationDate", notNullValue()))
         .andExpect(jsonPath("$.cityName", is(createMockAirportDTO.getCityName())))
         .andExpect(jsonPath("$.countryName",is(createMockAirportDTO.getCountryName())));
@@ -44,7 +44,7 @@ public class AirportApplicationUnitTestSupport {
     this.mockMvc.perform(get("/airport/search?name="+name).contentType(MediaType.APPLICATION_JSON))
       .andDo(print())
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.uuid", notNullValue()))
+      .andExpect(jsonPath("$.airportId", notNullValue()))
       .andExpect(jsonPath("$.foundationDate", notNullValue()))
       .andExpect(jsonPath("$.countryName", is(entity.getCountryName())))
       .andExpect(jsonPath("$.name", is(entity.getName())))

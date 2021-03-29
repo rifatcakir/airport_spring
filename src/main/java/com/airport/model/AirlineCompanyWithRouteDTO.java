@@ -8,11 +8,11 @@ import io.swagger.annotations.ApiOperation;
 public class AirlineCompanyWithRouteDTO {
 
   @NotNull
-  @ApiModelProperty(notes = "Company uuId", example = "402881e7787583d70178758ec9160007")
+  @ApiModelProperty(notes = "Company Id", example = "402881e7787583d70178758ec9160007")
   private String airlineCompanyId;
 
   @NotNull
-  @ApiModelProperty(notes = "Airline Route uuId", example = "402881e7787583d70178758ee2d90008")
+  @ApiModelProperty(notes = "Airline Route Id", example = "402881e7787583d70178758ee2d90008")
   private String routeId;
 
   public String getAirlineCompanyId() {
