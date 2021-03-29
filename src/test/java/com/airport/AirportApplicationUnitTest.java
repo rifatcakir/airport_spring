@@ -49,7 +49,7 @@ class AirportApplicationUnitTest {
   }
 
   @Test
-  void searchAirport() throws Exception {
+  void searchAirportByName() throws Exception {
     assertNotNull(applicationTestSupport);
     Airport entity = mockDataUtil.createAirportEntity();
     when(airportRepository.findByName(anyString())).thenReturn(entity);

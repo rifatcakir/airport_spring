@@ -76,7 +76,9 @@ class RouteApplicationUnitTest {
   @Test
   void searchRouteById() throws Exception {
     assertNotNull(applicationTestSupport);
-    Optional<FlyRoute> mockData = Optional.of(mockDataUtil.createMockFlyRoute());
+    FlyRoute route = mockDataUtil.createMockFlyRoute();
+    route.setUuid("1");
+    Optional<FlyRoute> mockData = Optional.of(route);
     when(routeRepository.findById(mockData.get().getUuid())).thenReturn(mockData);
     routeService.setRouteRepository(routeRepository);
     applicationTestSupport.searchAirportRouteById(mockData.get().getUuid());

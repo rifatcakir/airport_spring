@@ -37,7 +37,7 @@ public class TicketServiceImpl implements TicketService {
 
     Ticket newTicket = new Ticket();
     newTicket.setTicketPrice(verifyAmount(buyRequest, route));
-    newTicket.setCreditCardNumber(creditCardUtility.maskCCN(buyRequest.getCreditCardNo()));
+    newTicket.setCreditCardNumber(creditCardUtility.maskCCN(buyRequest.getCreditCardNumber()));
     newTicket.setFlyRoute(route);
     newTicket.setSeatNumber(buyRequest.getSeatNumber());
     flyPriceUtil.checkForIncreaseTicketPrice(route);
@@ -89,6 +89,18 @@ public class TicketServiceImpl implements TicketService {
       throw new IllegalArgumentException("Ticket buy denied! Ticket number out of range!");
     }
     return !flyRoute.getSeatStatus().get(buyRequest.getSeatNumber());
+  }
+
+
+  @Override
+  public void setRouteRepository(FlyRouteRepository routeRepository) {
+    this.routeRepository = routeRepository;
+  }
+
+
+  @Override
+  public void setTicketRepository(TicketRepository ticketRepository) {
+    this.ticketRepository = ticketRepository;
   }
 
 }
